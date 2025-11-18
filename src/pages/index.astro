@@ -1,21 +1,202 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ContextAlert from '../components/ContextAlert.astro';
-import Markdown from '../components/Markdown.astro';
 
-const explainer = `
-An Astro website can go way beyond static pages - on the right platform.
+const overviewCards = [
+    {
+        title: 'People & HR',
+        description: 'Onboard couriers, manage shifts, and keep compliance tasks organized in one place.',
+        highlight: '18 open tasks'
+    },
+    {
+        title: 'Customer Success',
+        description: 'Centralize delivery partners, SLAs, and key contacts with quick context for every interaction.',
+        highlight: '42 active customers'
+    },
+    {
+        title: 'Sales Operations',
+        description: 'Track pipelines, proposals, and renewals with clear ownership and next steps.',
+        highlight: '9 deals in flight'
+    }
+];
 
-Netlify supports not only [Streaming SSR](https://docs.astro.build/en/guides/server-side-rendering/#html-streaming) and fast [Edge Middleware](https://docs.astro.build/en/guides/middleware/), but also [on-demand revalidation](https://www.netlify.com/blog/cache-tags-and-purge-api-on-netlify/) and [stale-while-revalidate](https://www.netlify.com/blog/swr-and-fine-grained-cache-control/). 
-Any page or data can be rebuilt only when needed, without site visitors ever getting a performance hit.
-`;
+const customerMoments = [
+    {
+        name: 'Apex Retail',
+        need: 'Scaling weekend deliveries in 3 new cities.',
+        owner: 'Customer Team',
+        status: 'Action required today'
+    },
+    {
+        name: 'Northwind Logistics',
+        need: 'Quarterly performance review with SLA heatmap.',
+        owner: 'Sales Team',
+        status: 'Prep meeting notes'
+    },
+    {
+        name: 'Nova Markets',
+        need: 'Pilot expansion after successful 30-day trial.',
+        owner: 'Customer Team',
+        status: 'Convert to annual plan'
+    }
+];
+
+const dailyActivity = [
+    {
+        time: '08:30',
+        title: 'Attendance & route roll call',
+        owner: 'HR',
+        detail: 'Verify courier check-ins and escalate missing confirmations.'
+    },
+    {
+        time: '10:00',
+        title: 'Priority delivery review',
+        owner: 'Customer',
+        detail: 'Spotlight orders with VIP delivery windows and assign owners.'
+    },
+    {
+        time: '14:00',
+        title: 'Sales pipeline standup',
+        owner: 'Sales',
+        detail: 'Update expected close dates and unblock pricing approvals.'
+    },
+    {
+        time: '17:30',
+        title: 'End-of-day performance',
+        owner: 'Daily Activity',
+        detail: 'Capture completion rate, incidents, and delivery feedback.'
+    }
+];
 ---
 
-<Layout title="Welcome to Astro.">
-    <ContextAlert class="mb-8" />
-    <h1 class="mb-10">Netlify Platform Starter for Astro</h1>
-    <Markdown content={explainer} class="mb-10 text-lg" />
-    <p>
-        <a href="https://docs.netlify.com/frameworks/astro/" class="btn btn-lg sm:min-w-64">Read the Docs</a>
-    </p>
+<Layout title="HRMS Portal">
+    <section class="mb-12 space-y-6">
+        <p class="inline-block px-4 py-2 text-sm font-semibold rounded-full bg-white/10 text-white/90">
+            People · Customer · Sales · Daily Activity
+        </p>
+        <div class="grid items-start gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+            <div class="space-y-6">
+                <h1 class="text-4xl font-bold leading-tight sm:text-5xl">
+                    HRMS portal for last-mile delivery teams
+                </h1>
+                <p class="text-lg text-white/90">
+                    Bring your delivery workforce, customer commitments, and sales pipeline together. Track who is on the
+                    road, which customers need attention, and what activities must close today.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <a class="btn btn-lg" href="#daily-activity">View Daily Activity</a>
+                    <a class="btn btn-lg bg-white text-primary-content" href="#customers">
+                        Customer & Sales Hub
+                    </a>
+                </div>
+            </div>
+            <div class="p-6 space-y-4 rounded-xl bg-white/5 ring-1 ring-white/10">
+                <h2 class="text-2xl font-semibold">Today at a glance</h2>
+                <ul class="space-y-3 text-white/90">
+                    <li class="flex items-start gap-3">
+                        <span class="inline-flex items-center justify-center w-10 h-10 font-semibold rounded-lg bg-primary/80 text-primary-content">
+                            HR
+                        </span>
+                        <div>
+                            <p class="font-semibold">Attendance health</p>
+                            <p class="text-sm text-white/80">92% couriers checked in · 7 awaiting confirmation</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="inline-flex items-center justify-center w-10 h-10 font-semibold rounded-lg bg-white/15">
+                            CS
+                        </span>
+                        <div>
+                            <p class="font-semibold">Customer escalations</p>
+                            <p class="text-sm text-white/80">3 SLA alerts · 1 delivery re-route pending</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="inline-flex items-center justify-center w-10 h-10 font-semibold rounded-lg bg-white/10">
+                            SO
+                        </span>
+                        <div>
+                            <p class="font-semibold">Sales momentum</p>
+                            <p class="text-sm text-white/80">9 open deals · 2 contracts ready for signature</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="grid gap-6 mb-12 md:grid-cols-3">
+        {overviewCards.map((item) => (
+            <div class="p-6 space-y-3 transition rounded-xl bg-white/5 ring-1 ring-white/10 hover:-translate-y-1">
+                <div class="text-sm font-semibold text-primary/90">{item.highlight}</div>
+                <h3 class="text-xl font-semibold">{item.title}</h3>
+                <p class="text-white/80">{item.description}</p>
+                <button class="btn">Open {item.title}</button>
+            </div>
+        ))}
+    </section>
+
+    <section id="customers" class="grid gap-8 mb-14 lg:grid-cols-[1.1fr_0.9fr]">
+        <div class="p-6 space-y-4 rounded-xl bg-white/5 ring-1 ring-white/10">
+            <h2>Customer & Sales cockpit</h2>
+            <p class="text-white/80">
+                Surface renewals, upsell opportunities, and proactive delivery checkpoints. Keep customer and sales teams in
+                sync with the latest notes and next actions.
+            </p>
+            <div class="grid gap-4 md:grid-cols-2">
+                <div class="p-4 space-y-2 rounded-lg bg-primary/10 ring-1 ring-primary/30">
+                    <p class="text-sm font-semibold text-primary-content/90">Customer</p>
+                    <p class="text-lg font-semibold">Renewal & retention</p>
+                    <p class="text-sm text-primary-content/80">SLA dashboards, health scores, feedback loops.</p>
+                </div>
+                <div class="p-4 space-y-2 rounded-lg bg-white/10 ring-1 ring-white/15">
+                    <p class="text-sm font-semibold text-white/80">Sales</p>
+                    <p class="text-lg font-semibold">Pipeline & quotes</p>
+                    <p class="text-sm text-white/70">Pricing approvals, proposals, and digital signatures.</p>
+                </div>
+            </div>
+        </div>
+        <div class="p-6 space-y-4 rounded-xl bg-white/5 ring-1 ring-white/10">
+            <div class="flex items-center justify-between">
+                <h3 class="text-xl font-semibold">Customer touchpoints</h3>
+                <span class="text-sm text-white/70">This week</span>
+            </div>
+            <div class="space-y-4">
+                {customerMoments.map((item) => (
+                    <div class="p-4 space-y-1 rounded-lg bg-white/10 ring-1 ring-white/10">
+                        <div class="flex items-center justify-between">
+                            <p class="font-semibold">{item.name}</p>
+                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-primary/80 text-primary-content">
+                                {item.status}
+                            </span>
+                        </div>
+                        <p class="text-sm text-white/80">{item.need}</p>
+                        <p class="text-xs text-white/60">Owner: {item.owner}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section id="daily-activity" class="p-6 mb-14 space-y-6 rounded-xl bg-white/5 ring-1 ring-white/10">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+                <p class="text-sm font-semibold text-primary/90">Daily Activity</p>
+                <h2>Live run sheet</h2>
+                <p class="text-white/80">Stay ahead of what needs to be done across HR, customers, and sales.</p>
+            </div>
+            <a class="btn btn-lg" href="#">Download schedule</a>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+            {dailyActivity.map((item) => (
+                <div class="flex items-start gap-4 p-4 rounded-lg bg-white/10 ring-1 ring-white/10">
+                    <div class="px-3 py-1 text-sm font-semibold rounded-full bg-primary/80 text-primary-content">{item.time}</div>
+                    <div class="space-y-1">
+                        <p class="text-sm font-semibold text-white/80">{item.owner}</p>
+                        <h3 class="text-lg font-semibold">{item.title}</h3>
+                        <p class="text-white/80">{item.detail}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </section>
 </Layout>
