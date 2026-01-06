@@ -1,21 +1,161 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ContextAlert from '../components/ContextAlert.astro';
-import Markdown from '../components/Markdown.astro';
 
-const explainer = `
-An Astro website can go way beyond static pages - on the right platform.
+const highlights = [
+    'Perfect for Families · Couples · Kids',
+    'Mix of Theme Parks + City Life + Luxury',
+    'One of the Top-Selling Asia Routes',
+    'Instagrammable spots & iconic experiences'
+];
 
-Netlify supports not only [Streaming SSR](https://docs.astro.build/en/guides/server-side-rendering/#html-streaming) and fast [Edge Middleware](https://docs.astro.build/en/guides/middleware/), but also [on-demand revalidation](https://www.netlify.com/blog/cache-tags-and-purge-api-on-netlify/) and [stale-while-revalidate](https://www.netlify.com/blog/swr-and-fine-grained-cache-control/). 
-Any page or data can be rebuilt only when needed, without site visitors ever getting a performance hit.
-`;
+const inclusions = [
+    '6 Nights accommodation',
+    'Daily Breakfast',
+    'Airport & intercity transfers (SIC)',
+    'Ocean Park ticket',
+    'Disneyland full-day ticket',
+    'Lantau Island + Cable Car',
+    'Hong Kong Night Tour',
+    'Macau Half-Day City Tour'
+];
+
+const exclusions = ['Visa fees', 'Personal expenses', 'Peak season surcharge (if any)'];
+
+const dayPlan = [
+    {
+        day: 'Day 1',
+        title: 'Hong Kong Arrival',
+        details: 'Airport pickup (SIC) → Hotel check-in → Free evening'
+    },
+    {
+        day: 'Day 2',
+        title: 'Ocean Park Adventure',
+        details: 'Thrilling rides, animal encounters, and aqua shows'
+    },
+    {
+        day: 'Day 3',
+        title: 'Lantau Island + Night Tour',
+        details: 'Ngong Ping 360 Cable Car, Big Buddha & Po Lin Monastery, Victoria Peak, Star Ferry, Night Market'
+    },
+    {
+        day: 'Day 4',
+        title: 'Disneyland Magic',
+        details: 'Full day at Hong Kong Disneyland — Iron Man, Mystic Manor, Castle of Magical Dreams'
+    },
+    {
+        day: 'Day 5',
+        title: 'Hong Kong ➝ Macau',
+        details: 'Ferry transfer, hotel check-in, free evening for casinos and night lights'
+    },
+    {
+        day: 'Day 6',
+        title: 'Macau City Tour',
+        details: 'Ruins of St. Paul’s, A-Ma Temple, Macau Tower (photo stop)'
+    },
+    {
+        day: 'Day 7',
+        title: 'Departure',
+        details: 'Fly home with unforgettable memories'
+    }
+];
 ---
 
-<Layout title="Welcome to Astro.">
-    <ContextAlert class="mb-8" />
-    <h1 class="mb-10">Netlify Platform Starter for Astro</h1>
-    <Markdown content={explainer} class="mb-10 text-lg" />
-    <p>
-        <a href="https://docs.netlify.com/frameworks/astro/" class="btn btn-lg sm:min-w-64">Read the Docs</a>
-    </p>
+<Layout title="Hong Kong • Disneyland • Macau Escape">
+    <section class="grid gap-10 md:grid-cols-[1.2fr_1fr] items-start">
+        <div class="space-y-6">
+            <p class="inline-flex items-center gap-2 px-3 py-1 text-sm font-semibold rounded-full bg-white/10 border border-white/15">
+                6 Nights / 7 Days · 2 Countries · 2 Cities
+            </p>
+            <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
+                Hong Kong • Disneyland • Macau Escape
+            </h1>
+            <p class="text-xl text-white/80">
+                A blockbuster Asia getaway that blends theme-park thrills, skyline nights, and luxe waterfront stays —
+                crafted for families, couples, and kids.
+            </p>
+            <div class="grid gap-3 sm:grid-cols-2">
+                {highlights.map((item) => (
+                    <div class="flex items-start gap-3 p-4 rounded-lg bg-white/5 border border-white/10">
+                        <span class="text-lg">🔥</span>
+                        <p class="font-semibold leading-snug">{item}</p>
+                    </div>
+                ))}
+            </div>
+            <div class="flex flex-wrap gap-4">
+                <a href="tel:+96895588801" class="btn btn-lg sm:min-w-44">Call +968 9558 8801</a>
+                <a href="mailto:holidays@israh.om" class="btn btn-lg sm:min-w-44 bg-white/15 hover:bg-white/25">Email Us</a>
+            </div>
+        </div>
+        <div class="p-6 space-y-6 bg-white/5 border border-white/10 rounded-2xl shadow-lg">
+            <div>
+                <p class="text-sm uppercase tracking-wide text-white/60">Starting from</p>
+                <p class="text-4xl font-bold">OMR 650 <span class="text-base font-semibold text-white/70">per person</span></p>
+                <p class="text-sm text-white/70">(Flights & visa excluded)</p>
+            </div>
+            <div>
+                <p class="text-sm uppercase tracking-wide text-white/60">Hotel Stay (or similar)</p>
+                <ul class="mt-2 space-y-1 text-base">
+                    <li>Hong Kong: 4★ City Hotel</li>
+                    <li>Macau: 4★ Central Hotel</li>
+                </ul>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2">
+                <div>
+                    <p class="text-sm uppercase tracking-wide text-white/60">Includes</p>
+                    <ul class="mt-2 space-y-1 text-sm leading-relaxed list-disc list-inside">
+                        {inclusions.map((item) => (
+                            <li>{item}</li>
+                        ))}
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-sm uppercase tracking-wide text-white/60">Excludes</p>
+                    <ul class="mt-2 space-y-1 text-sm leading-relaxed list-disc list-inside text-white/80">
+                        {exclusions.map((item) => (
+                            <li>{item}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+            <div class="p-4 rounded-xl bg-primary text-primary-content shadow">
+                <p class="text-sm font-semibold uppercase tracking-wide">Limited slots</p>
+                <p class="text-lg font-bold">Book now to lock the best dates & rates</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-14 space-y-6">
+        <div class="flex items-center gap-3">
+            <span class="inline-flex items-center justify-center w-10 h-10 text-lg font-bold rounded-full bg-white/10 border border-white/15">🗺️</span>
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-bold">Day-wise Snap View</h2>
+                <p class="text-white/70">Every day mapped out for ease, excitement, and effortless logistics.</p>
+            </div>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+            {dayPlan.map((item) => (
+                <div class="p-5 rounded-xl bg-white/5 border border-white/10 shadow-sm">
+                    <p class="text-sm font-semibold text-white/70">{item.day}</p>
+                    <p class="mt-1 text-lg font-bold">{item.title}</p>
+                    <p class="mt-2 text-white/80 leading-relaxed">{item.details}</p>
+                </div>
+            ))}
+        </div>
+    </section>
+
+    <section class="mt-14 p-6 rounded-2xl border border-white/10 bg-gradient-to-r from-primary to-complementary text-primary-content shadow-lg">
+        <div class="grid gap-6 items-center md:grid-cols-[2fr_1fr]">
+            <div>
+                <h2 class="text-3xl font-extrabold">Ready to make it unforgettable?</h2>
+                <p class="mt-2 text-primary-content/80">
+                    Share your travel dates and group size — our experts will confirm availability, transfers, and
+                    park timings so you can simply pack and go.
+                </p>
+            </div>
+            <div class="flex flex-wrap gap-3">
+                <a href="tel:+96894910600" class="btn bg-white text-primary hover:bg-white/90">+968 9491 0600</a>
+                <a href="https://www.israh.om" class="btn bg-white/20 text-primary-content hover:bg-white/30">Visit israh.om</a>
+            </div>
+        </div>
+    </section>
 </Layout>
